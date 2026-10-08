@@ -1,0 +1,11 @@
+import { build } from 'esbuild';
+import { mkdir, writeFile } from 'node:fs/promises';
+import sharp from 'sharp';
+await mkdir('assets', { recursive: true });
+const svg = `<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="a" x2="0" y2="1"><stop stop-color="#677e69"/><stop offset="1" stop-color="#263f32"/></linearGradient></defs><rect x="12" y="12" width="488" height="488" rx="110" fill="url(#a)"/><rect x="49" y="49" width="414" height="414" rx="82" fill="none" stroke="#b2bda3" stroke-opacity=".3" stroke-width="2"/><path d="M112 140Q193 119 247 157V369Q193 331 112 352Z M400 140Q319 119 265 157V369Q319 331 400 352Z" fill="#efe6d5"/><path d="M145 193H206M145 226H206M145 259H194M300 193H367M300 226H367M300 259H348" fill="none" stroke="#a8a68c" stroke-width="8" stroke-linecap="round"/><path d="M338 139V302L360 286L381 302V140" fill="#bd7858"/></svg>`;
+await writeFile('assets/icon.svg', svg);
+await sharp(Buffer.from(svg)).png().toFile('assets/icon.png');
+for (const name of ['main', 'preload', 'worker']) {
+  await build({ entryPoints: [`src/desktop/${name}.ts`], outfile: `dist/${name}.cjs`, bundle: true,
+    platform: 'node', format: 'cjs', target: 'node22', packages: 'external', sourcemap: false });
+}
