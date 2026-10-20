@@ -6,6 +6,10 @@
 
 ![制书台](screenshots/界面预览.png)
 
+## 下载
+
+Windows 10/11 x64 免安装版：[Folio 0.1.0](https://github.com/Neocvsu-commits/Folio/releases/tag/v0.1.0)（约 98 MB，未签名，首次运行 SmartScreen 可能提示）。
+
 ## 为什么不用现成工具
 
 能翻整本书的工具不少，但大多把正文整段替换成中文，或者把译文堆成另起一段的大块。读完一段英文要往下找半天对应中文，阅读体验就散了。
